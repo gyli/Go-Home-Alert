@@ -1,0 +1,13 @@
+{
+  "start_time": "18:00",
+  "end_time": "18:20",
+  "metro_api": "",
+  "metro_line": "BL",
+  "metro_destination": "C01",
+  "metro_station": "C04",
+  "metro_direction": "2",
+  "mail_key": "",
+  "mail_domain": "sample.com",
+  "mail_from": "sample-from@gmail.com",
+  "mail_to": "sample-t0@gmail.com"
+}
