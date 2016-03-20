@@ -42,7 +42,7 @@ def job():
         raise SystemExit(0)
 
     # if end time passed and no message sent, quit anyway
-    if end_time >= datetime.now().time():
+    if end_time < datetime.now().time():
         raise SystemExit(0)
 
 schedule.every().monday.tuesday.wednesday.thursday.friday.at(conn['start_time']).do(job)
