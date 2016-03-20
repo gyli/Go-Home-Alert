@@ -41,9 +41,6 @@ def job():
         send_message(metro_time=max(time_list))
         raise SystemExit(0)
 
-    # if end time passed and no message sent, quit anyway
-    if end_time < datetime.now().time():
-        raise SystemExit(0)
 
 schedule.every().monday.tuesday.wednesday.thursday.friday.at(conn['start_time']).do(job)
 
@@ -51,4 +48,6 @@ while True:
     schedule.run_pending()
     time.sleep(20)
 
-
+    # if end time passed and no message sent, quit anyway
+    if end_time < datetime.now().time():
+        raise SystemExit(0)
