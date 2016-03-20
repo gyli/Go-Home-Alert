@@ -46,8 +46,9 @@ schedule.every().monday.tuesday.wednesday.thursday.friday.at(conn['start_time'])
 
 while True:
     schedule.run_pending()
-    time.sleep(20)
 
     # if end time passed and no message sent, quit anyway
     if end_time < datetime.now().time():
         raise SystemExit(0)
+
+    time.sleep(20)
