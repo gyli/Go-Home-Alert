@@ -9,5 +9,5 @@
   "mail_key": "",
   "mail_domain": "sample.com",
   "mail_from": "sample-from@gmail.com",
-  "mail_to": "sample-t0@gmail.com"
+  "mail_to": "sample-to@gmail.com"
 }
