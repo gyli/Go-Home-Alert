@@ -4,7 +4,6 @@
 from datetime import datetime
 import json
 import requests
-import schedule
 import time
 
 
@@ -41,11 +40,8 @@ def job():
         send_message(metro_time=max(time_list))
         raise SystemExit(0)
 
-
-schedule.every().monday.tuesday.wednesday.thursday.friday.at(conn['start_time']).do(job)
-
 while True:
-    schedule.run_pending()
+    job()
 
     # if end time passed and no message sent, quit anyway
     if end_time < datetime.now().time():
