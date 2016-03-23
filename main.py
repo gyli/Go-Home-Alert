@@ -14,6 +14,7 @@ end_time = datetime.strptime(conn['end_time'], '%H:%M').time()
 
 
 def send_message(metro_time):
+    print("Mail sent")
     request_url = 'https://api.mailgun.net/v2/{0}/messages'.format(conn['mail_domain'])
     request = requests.post(request_url, auth=('api', conn['mail_key']), data={
         'from': conn['mail_from'],
@@ -39,6 +40,8 @@ def job():
     if max(time_list) > 8:
         send_message(metro_time=max(time_list))
         raise SystemExit(0)
+
+print("Job start")
 
 while True:
     job()
