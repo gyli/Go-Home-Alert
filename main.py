@@ -36,8 +36,7 @@ def job():
 
     time_list = [int(m.get('Min')) for m in metro_info_list if m.get('Line') == conn['metro_line'] and (m.get('DestinationCode') == conn['metro_destination'] or m.get('Group') == conn['metro_direction']) and m.get('Min').isdecimal()]
 
-    # I need 8 minutes to walk to station and the time of a new train record is normally greater than 8
-    if max(time_list, default=0) > 8:
+    if max(time_list, default=0) > 4:
         send_message(metro_time=max(time_list))
         raise SystemExit(0)
 
