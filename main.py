@@ -13,8 +13,7 @@ with open('conn.json', 'r') as conn_file:
 end_time = datetime.strptime(conn['end_time'], '%H:%M').time()
 
 
-def send_message(metro_time):
-    print("Mail sent")
+def send_email_message(metro_time):
     request_url = 'https://api.mailgun.net/v2/{0}/messages'.format(conn['mail_domain'])
     request = requests.post(request_url, auth=('api', conn['mail_key']), data={
         'from': conn['mail_from'],
@@ -22,6 +21,19 @@ def send_message(metro_time):
         'subject': 'Time to go home!',
         'text': 'You have {0} minutes for the metro.'.format(metro_time)
     })
+    print("Mail sent")
+
+
+def send_pushbullet_message(metro_time):
+    from pushbullet import Pushbullet
+
+    pb = Pushbullet(conn['pushbullet_api_key'])
+
+    # If device name is provided, push to this device only
+    to = pb.get_device(conn['pushbullet_device']) if conn['pushbullet_device'] else pb
+
+    to.push_note("Time to go home!", "You have {0} minutes for the metro.".format(metro_time))
+    print("Message pushed")
 
 
 def job():
@@ -37,7 +49,8 @@ def job():
     time_list = [int(m.get('Min')) for m in metro_info_list if m.get('Line') == conn['metro_line'] and (m.get('DestinationCode') == conn['metro_destination'] or m.get('Group') == conn['metro_direction']) and m.get('Min').isdecimal()]
 
     if max(time_list, default=0) > 4:
-        send_message(metro_time=max(time_list))
+        # send_email_message(metro_time=max(time_list))
+        send_pushbullet_message(metro_time=max(time_list))
         raise SystemExit(0)
 
 
