@@ -10,5 +10,5 @@
   "mail_from": "sample-from@gmail.com",
   "mail_to": "sample-to@gmail.com",
   "pushbullet_api_key": "",
-  "pushbullet_device": "",
+  "pushbullet_device": ""
 }
